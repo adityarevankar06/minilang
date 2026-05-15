@@ -1,0 +1,81 @@
+# Program 2: Recognize whether a token is a keyword, identifier, or constant
+# MiniLang has no switch/char indexing, so we use string equality to match
+# known keywords, and integer values to simulate numeric constants.
+
+# We test three separate "tokens" represented as strings and ints:
+#   - "if"   → keyword
+#   - "myVar" → identifier (not a keyword; alphabetic)
+#   - 42     → integer constant
+
+# ── Check for keyword ─────────────────────────────────────────────────────────
+# MiniLang keywords: var func if else while for return print int float bool string
+func is_keyword(token : string) : bool {
+    if (token == "var")    { return true; }
+    if (token == "func")   { return true; }
+    if (token == "if")     { return true; }
+    if (token == "else")   { return true; }
+    if (token == "while")  { return true; }
+    if (token == "for")    { return true; }
+    if (token == "return") { return true; }
+    if (token == "print")  { return true; }
+    if (token == "int")    { return true; }
+    if (token == "float")  { return true; }
+    if (token == "bool")   { return true; }
+    if (token == "string") { return true; }
+    if (token == "true")   { return true; }
+    if (token == "false")  { return true; }
+    return false;
+}
+
+# ── Test token 1: "if" (should be keyword) ───────────────────────────────────
+var token1 : string = "if";
+print("Token:");
+print(token1);
+if (is_keyword(token1)) {
+    print("Category: KEYWORD");
+} else {
+    print("Category: IDENTIFIER");
+}
+
+# ── Test token 2: "myVar" (should be identifier) ─────────────────────────────
+var token2 : string = "myVar";
+print("Token:");
+print(token2);
+if (is_keyword(token2)) {
+    print("Category: KEYWORD");
+} else {
+    print("Category: IDENTIFIER");
+}
+
+# ── Test token 3: numeric constant 42 ────────────────────────────────────────
+# An integer value is always a constant — we represent this directly.
+var token3 : int = 42;
+print("Token:");
+print(token3);
+print("Category: CONSTANT (integer)");
+
+# ── Test token 4: "3.14" as a float constant ─────────────────────────────────
+var token4 : float = 3.14;
+print("Token:");
+print(token4);
+print("Category: CONSTANT (float)");
+
+# ── Test token 5: "while" (keyword) ──────────────────────────────────────────
+var token5 : string = "while";
+print("Token:");
+print(token5);
+if (is_keyword(token5)) {
+    print("Category: KEYWORD");
+} else {
+    print("Category: IDENTIFIER");
+}
+
+# ── Test token 6: "counter" (identifier) ─────────────────────────────────────
+var token6 : string = "counter";
+print("Token:");
+print(token6);
+if (is_keyword(token6)) {
+    print("Category: KEYWORD");
+} else {
+    print("Category: IDENTIFIER");
+}

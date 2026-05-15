@@ -1,0 +1,75 @@
+# Program 1: Count vowels and consonants
+# MiniLang has no arrays or char indexing, so we simulate by
+# encoding each letter as an integer (ASCII-style) and iterating.
+# We represent the word "hello" manually as individual char codes.
+# a=97,e=101,i=105,o=111,u=117 (vowels)
+# h=104, l=108, o=111, l=108, o=111  → "hello"
+
+func is_vowel(ch : int) : bool {
+    if (ch == 97) { return true; }   # a
+    if (ch == 101) { return true; }  # e
+    if (ch == 105) { return true; }  # i
+    if (ch == 111) { return true; }  # o
+    if (ch == 117) { return true; }  # u
+    if (ch == 65) { return true; }   # A
+    if (ch == 69) { return true; }   # E
+    if (ch == 73) { return true; }   # I
+    if (ch == 79) { return true; }   # O
+    if (ch == 85) { return true; }   # U
+    return false;
+}
+
+func is_alpha(ch : int) : bool {
+    if ((ch >= 65) && (ch <= 90)) { return true; }   # A-Z
+    if ((ch >= 97) && (ch <= 122)) { return true; }  # a-z
+    return false;
+}
+
+# Word: "hello" → char codes: 104, 101, 108, 108, 111
+var vowels    : int = 0;
+var consonants : int = 0;
+
+var chars : int = 5;   # length of "hello"
+
+# Process each character of "hello" manually
+var c1 : int = 104;   # h
+var c2 : int = 101;   # e
+var c3 : int = 108;   # l
+var c4 : int = 108;   # l
+var c5 : int = 111;   # o
+
+# Check c1 (h)
+if (is_alpha(c1)) {
+    if (is_vowel(c1)) { vowels = vowels + 1; }
+    else { consonants = consonants + 1; }
+}
+
+# Check c2 (e)
+if (is_alpha(c2)) {
+    if (is_vowel(c2)) { vowels = vowels + 1; }
+    else { consonants = consonants + 1; }
+}
+
+# Check c3 (l)
+if (is_alpha(c3)) {
+    if (is_vowel(c3)) { vowels = vowels + 1; }
+    else { consonants = consonants + 1; }
+}
+
+# Check c4 (l)
+if (is_alpha(c4)) {
+    if (is_vowel(c4)) { vowels = vowels + 1; }
+    else { consonants = consonants + 1; }
+}
+
+# Check c5 (o)
+if (is_alpha(c5)) {
+    if (is_vowel(c5)) { vowels = vowels + 1; }
+    else { consonants = consonants + 1; }
+}
+
+print("Word: hello");
+print("Vowel count:");
+print(vowels);
+print("Consonant count:");
+print(consonants);

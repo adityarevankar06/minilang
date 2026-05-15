@@ -1,0 +1,128 @@
+# Program 6: Check whether a statement is a valid link section or
+#            definition section of a C program.
+#
+# Link section       = #include directives  e.g. "#include <stdio.h>"
+# Definition section = #define macros       e.g. "#define MAX 100"
+# Other              = general C statements (main, printf, etc.)
+
+func classify(stmt : string) : string {
+    # Known #include patterns -> LINK_SECTION
+    if (stmt == "#include <stdio.h>")   { return "LINK_SECTION"; }
+    if (stmt == "#include <stdlib.h>")  { return "LINK_SECTION"; }
+    if (stmt == "#include <math.h>")    { return "LINK_SECTION"; }
+    if (stmt == "#include <string.h>")  { return "LINK_SECTION"; }
+    if (stmt == "#include <ctype.h>")   { return "LINK_SECTION"; }
+
+    # Known #define patterns -> DEFINITION_SECTION
+    if (stmt == "#define MAX 100")      { return "DEFINITION_SECTION"; }
+    if (stmt == "#define PI 3.14")      { return "DEFINITION_SECTION"; }
+    if (stmt == "#define TRUE 1")       { return "DEFINITION_SECTION"; }
+    if (stmt == "#define FALSE 0")      { return "DEFINITION_SECTION"; }
+    if (stmt == "#define SIZE 256")     { return "DEFINITION_SECTION"; }
+
+    return "OTHER";
+}
+
+# ── Test statements ───────────────────────────────────────────────────────────
+
+var s1 : string = "#include <stdio.h>";
+print("Statement:");
+print(s1);
+print("Category:");
+print(classify(s1));
+
+var s2 : string = "#define MAX 100";
+print("Statement:");
+print(s2);
+print("Category:");
+print(classify(s2));
+
+var s3 : string = "#include <math.h>";
+print("Statement:");
+print(s3);
+print("Category:");
+print(classify(s3));
+
+var s4 : string = "#define PI 3.14";
+print("Statement:");
+print(s4);
+print("Category:");
+print(classify(s4));
+
+var s5 : string = "int main() {";
+print("Statement:");
+print(s5);
+print("Category:");
+print(classify(s5));
+
+var s6 : string = "return 0;";
+print("Statement:");
+print(s6);
+print("Category:");
+print(classify(s6));
+
+var s7 : string = "#include <stdlib.h>";
+print("Statement:");
+print(s7);
+print("Category:");
+print(classify(s7));
+
+var s8 : string = "#define SIZE 256";
+print("Statement:");
+print(s8);
+print("Category:");
+print(classify(s8));
+
+# ── Summary count ─────────────────────────────────────────────────────────────
+var link_count  : int = 0;
+var def_count   : int = 0;
+var other_count : int = 0;
+
+var c1 : string = classify(s1);
+var c2 : string = classify(s2);
+var c3 : string = classify(s3);
+var c4 : string = classify(s4);
+var c5 : string = classify(s5);
+var c6 : string = classify(s6);
+var c7 : string = classify(s7);
+var c8 : string = classify(s8);
+
+if (c1 == "LINK_SECTION")        { link_count  = link_count  + 1; }
+if (c1 == "DEFINITION_SECTION")  { def_count   = def_count   + 1; }
+if (c1 == "OTHER")               { other_count = other_count + 1; }
+
+if (c2 == "LINK_SECTION")        { link_count  = link_count  + 1; }
+if (c2 == "DEFINITION_SECTION")  { def_count   = def_count   + 1; }
+if (c2 == "OTHER")               { other_count = other_count + 1; }
+
+if (c3 == "LINK_SECTION")        { link_count  = link_count  + 1; }
+if (c3 == "DEFINITION_SECTION")  { def_count   = def_count   + 1; }
+if (c3 == "OTHER")               { other_count = other_count + 1; }
+
+if (c4 == "LINK_SECTION")        { link_count  = link_count  + 1; }
+if (c4 == "DEFINITION_SECTION")  { def_count   = def_count   + 1; }
+if (c4 == "OTHER")               { other_count = other_count + 1; }
+
+if (c5 == "LINK_SECTION")        { link_count  = link_count  + 1; }
+if (c5 == "DEFINITION_SECTION")  { def_count   = def_count   + 1; }
+if (c5 == "OTHER")               { other_count = other_count + 1; }
+
+if (c6 == "LINK_SECTION")        { link_count  = link_count  + 1; }
+if (c6 == "DEFINITION_SECTION")  { def_count   = def_count   + 1; }
+if (c6 == "OTHER")               { other_count = other_count + 1; }
+
+if (c7 == "LINK_SECTION")        { link_count  = link_count  + 1; }
+if (c7 == "DEFINITION_SECTION")  { def_count   = def_count   + 1; }
+if (c7 == "OTHER")               { other_count = other_count + 1; }
+
+if (c8 == "LINK_SECTION")        { link_count  = link_count  + 1; }
+if (c8 == "DEFINITION_SECTION")  { def_count   = def_count   + 1; }
+if (c8 == "OTHER")               { other_count = other_count + 1; }
+
+print("=== Summary ===");
+print("Link section (#include) count:");
+print(link_count);
+print("Definition section (#define) count:");
+print(def_count);
+print("Other statements count:");
+print(other_count);

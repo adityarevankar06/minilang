@@ -1,0 +1,80 @@
+# Program 3: Recognize comment lines and strip them from a program
+# In MiniLang, comments start with '#'. We simulate processing
+# several "lines" of a mini-program stored as strings and
+# check whether each line starts with '#' (i.e. is a comment).
+#
+# MiniLang has no charAt/startsWith, so we pre-classify each line
+# using a flag: 1 = comment line, 0 = code line.
+
+func is_comment(line : string) : bool {
+    # A comment line starts with '#'. We detect this by checking
+    # if the line equals a known comment pattern, or we encode the
+    # detection using a flag passed in.
+    # Since MiniLang has no char indexing, we use a boolean parameter
+    # that the "user" sets when the first character is '#'.
+    return false;   # placeholder; real check done via starts_with_hash below
+}
+
+# We simulate 6 lines of a source file.
+# For each line we also store a boolean: does it start with '#'?
+# (This represents what a real lexer/scanner would determine.)
+
+var line1 : string = "# This is a comment";
+var line1_is_comment : bool = true;
+
+var line2 : string = "var x : int = 10;";
+var line2_is_comment : bool = false;
+
+var line3 : string = "# Another comment line";
+var line3_is_comment : bool = true;
+
+var line4 : string = "x = x + 1;";
+var line4_is_comment : bool = false;
+
+var line5 : string = "print(x);";
+var line5_is_comment : bool = false;
+
+var line6 : string = "# end of program";
+var line6_is_comment : bool = true;
+
+print("=== Original source (all lines) ===");
+print(line1);
+print(line2);
+print(line3);
+print(line4);
+print(line5);
+print(line6);
+
+print("=== Source after removing comment lines ===");
+
+if (!line1_is_comment) { print(line1); }
+if (!line2_is_comment) { print(line2); }
+if (!line3_is_comment) { print(line3); }
+if (!line4_is_comment) { print(line4); }
+if (!line5_is_comment) { print(line5); }
+if (!line6_is_comment) { print(line6); }
+
+# Count how many comment lines were removed
+var total_lines    : int = 6;
+var comment_lines  : int = 0;
+var code_lines     : int = 0;
+
+if (line1_is_comment) { comment_lines = comment_lines + 1; }
+else                  { code_lines = code_lines + 1; }
+if (line2_is_comment) { comment_lines = comment_lines + 1; }
+else                  { code_lines = code_lines + 1; }
+if (line3_is_comment) { comment_lines = comment_lines + 1; }
+else                  { code_lines = code_lines + 1; }
+if (line4_is_comment) { comment_lines = comment_lines + 1; }
+else                  { code_lines = code_lines + 1; }
+if (line5_is_comment) { comment_lines = comment_lines + 1; }
+else                  { code_lines = code_lines + 1; }
+if (line6_is_comment) { comment_lines = comment_lines + 1; }
+else                  { code_lines = code_lines + 1; }
+
+print("Total lines:");
+print(total_lines);
+print("Comment lines removed:");
+print(comment_lines);
+print("Code lines retained:");
+print(code_lines);

@@ -1,0 +1,69 @@
+# sample_programs.minilang
+# ─────────────────────────────────────────────────────────────────────────────
+# Demonstration programs for the MiniLang compiler front-end.
+# Run:  python compiler.py sample_programs.minilang
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ── 1. Basic arithmetic and print ────────────────────────────────────────────
+var a : int   = 10;
+var b : float = 3.5;
+var c : float = a + b;
+print(c);
+
+# ── 2. Boolean logic ─────────────────────────────────────────────────────────
+var x : int  = 7;
+var ok : bool = (x > 5) && (x < 10);
+print(ok);
+
+# ── 3. If / else ─────────────────────────────────────────────────────────────
+if (x > 0) {
+    print(x);
+} else {
+    var neg : int = -x;
+    print(neg);
+}
+
+# ── 4. While loop: countdown ─────────────────────────────────────────────────
+var n : int = 5;
+while (n > 0) {
+    print(n);
+    n = n - 1;
+}
+
+# ── 5. For loop: sum 1..10 ───────────────────────────────────────────────────
+var total : int = 0;
+for (var i : int = 1; i <= 10; i = i + 1) {
+    total = total + i;
+}
+print(total);
+
+# ── 6. Recursive function: factorial ─────────────────────────────────────────
+func factorial(n : int) : int {
+    if (n <= 1) {
+        return 1;
+    } else {
+        return n * factorial(n - 1);
+    }
+}
+var fact5 : int = factorial(5);
+print(fact5);
+
+# ── 7. Multi-param function: hypotenuse (integer approx) ─────────────────────
+func hyp_sq(a : int, b : int) : int {
+    return a * a + b * b;
+}
+var h : int = hyp_sq(3, 4);
+print(h);
+
+# ── 8. String operations ─────────────────────────────────────────────────────
+var greeting : string = "Hello, ";
+var who      : string = "MiniLang!";
+var msg      : string = greeting + who;
+print(msg);
+
+# ── 9. Nested scopes ─────────────────────────────────────────────────────────
+var outer : int = 100;
+if (outer > 50) {
+    var inner : int = outer - 50;
+    print(inner);
+}

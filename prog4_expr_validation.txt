@@ -1,0 +1,92 @@
+# Program 4: Check whether an arithmetic expression is valid or invalid
+#
+# We tokenise expressions using integer codes:
+#   0 = operand (number)
+#   1 = operator (+, -, *, /)
+#   2 = left parenthesis
+#   3 = right parenthesis
+#  -1 = unused slot
+#
+# Validation rules:
+#   1. Expression must not start with an operator
+#   2. Expression must not end with an operator
+#   3. Two consecutive operators are not allowed
+
+func check_expr(t1 : int, t2 : int, t3 : int, t4 : int, t5 : int, length : int) : bool {
+    # Rule 1: must not start with an operator
+    if (t1 == 1) { return false; }
+
+    # Rule 2: must not end with an operator (check last slot by length)
+    if (length == 2) {
+        if (t2 == 1) { return false; }
+    }
+    if (length == 3) {
+        if (t3 == 1) { return false; }
+    }
+    if (length == 4) {
+        if (t4 == 1) { return false; }
+    }
+    if (length == 5) {
+        if (t5 == 1) { return false; }
+    }
+
+    # Rule 3: no two consecutive operators
+    if ((t1 == 1) && (t2 == 1)) { return false; }
+    if ((t2 == 1) && (t3 == 1)) { return false; }
+    if (length >= 4) {
+        if ((t3 == 1) && (t4 == 1)) { return false; }
+    }
+    if (length == 5) {
+        if ((t4 == 1) && (t5 == 1)) { return false; }
+    }
+
+    return true;
+}
+
+# ── Test Case 1: "3 + 4"  → 0 1 0  (VALID) ──────────────────────────────────
+print("Expression: 3 + 4");
+var r1 : bool = check_expr(0, 1, 0, -1, -1, 3);
+if (r1) { print("Result: VALID"); }
+else    { print("Result: INVALID"); }
+
+# ── Test Case 2: "+ 3 * 2"  → starts with operator (INVALID) ────────────────
+print("Expression: + 3 * 2");
+var r2 : bool = check_expr(1, 0, 1, 0, -1, 4);
+if (r2) { print("Result: VALID"); }
+else    { print("Result: INVALID"); }
+
+# ── Test Case 3: "5 * 2 + 1"  → 0 1 0 1 0  (VALID) ─────────────────────────
+print("Expression: 5 * 2 + 1");
+var r3 : bool = check_expr(0, 1, 0, 1, 0, 5);
+if (r3) { print("Result: VALID"); }
+else    { print("Result: INVALID"); }
+
+# ── Test Case 4: "7 + + 2"  → consecutive operators (INVALID) ───────────────
+print("Expression: 7 + + 2");
+var r4 : bool = check_expr(0, 1, 1, 0, -1, 4);
+if (r4) { print("Result: VALID"); }
+else    { print("Result: INVALID"); }
+
+# ── Test Case 5: "4 -"  → ends with operator (INVALID) ──────────────────────
+print("Expression: 4 - (incomplete)");
+var r5 : bool = check_expr(0, 1, -1, -1, -1, 2);
+if (r5) { print("Result: VALID"); }
+else    { print("Result: INVALID"); }
+
+# ── Test Case 6: "( 3 + 4 )"  → 2 0 1 0 3  (VALID) ─────────────────────────
+print("Expression: ( 3 + 4 )");
+var r6 : bool = check_expr(2, 0, 1, 0, 3, 5);
+if (r6) { print("Result: VALID"); }
+else    { print("Result: INVALID"); }
+
+# ── Test Case 7: "* 6"  → starts with operator (INVALID) ────────────────────
+print("Expression: * 6");
+var r7 : bool = check_expr(1, 0, -1, -1, -1, 2);
+if (r7) { print("Result: VALID"); }
+else    { print("Result: INVALID"); }
+
+# ── Test Case 8: "8 / 2"  → 0 1 0  (VALID) ──────────────────────────────────
+print("Expression: 8 / 2");
+var r8 : bool = check_expr(0, 1, 0, -1, -1, 3);
+if (r8) { print("Result: VALID"); }
+else    { print("Result: INVALID"); }
